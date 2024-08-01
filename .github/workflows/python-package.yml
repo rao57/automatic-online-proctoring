@@ -25,10 +25,13 @@ jobs:
       run: |
         pip install -r requirements.txt
 
+    - name: Install Heroku CLI
+      run: curl https://cli-assets.heroku.com/install.sh | sh
+
     - name: Authenticate to Heroku
       run: |
         echo "machine api.heroku.com" >> ~/.netrc
-        echo "login ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+        echo "login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
         echo "password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
         heroku auth:token
 
@@ -37,4 +40,4 @@ jobs:
         git remote add heroku https://git.heroku.com/your-heroku-app.git
         git push heroku main
       env:
-        HEROKU_API_KEY: ${{ secrets.HRKU-58a07e2a-9b9f-4208-ab5a-d20a9523af5c }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
